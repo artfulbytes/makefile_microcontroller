@@ -30,7 +30,9 @@ LDFLAGS = -mmcu=$(MCU) $(addprefix -L,$(LIB_DIRS))
 # Build
 ###########################################################
 $(TARGET): $(OBJECTS)
+	@echo "Linking $^"
 	$(CC) $(LDFLAGS) -o $@ $^
 
 %.o: %.c
+	@echo "Compiling $^"
 	$(CC) $(CFLAGS) -c -o $@ $^
