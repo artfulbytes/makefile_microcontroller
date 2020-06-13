@@ -16,6 +16,8 @@ LIB_DIRS = $(INCLUDE_GCC_DIR)
 # Files
 ###########################################################
 TARGET = blink
+SOURCES = blink.c
+OBJECTS = blink.o
 
 ###########################################################
 # Flags
@@ -27,8 +29,8 @@ LDFLAGS = -mmcu=$(MCU) $(addprefix -L,$(LIB_DIRS))
 ###########################################################
 # Build
 ###########################################################
-$(TARGET): blink.o
-	$(CC) $(LDFLAGS) -o $(TARGET) blink.o
+$(TARGET): $(OBJECTS)
+	$(CC) $(LDFLAGS) -o $@ $^
 
-blink.o: blink.c
-	$(CC) -c $(CFLAGS) -o blink.o blink.c
+%.o: %.c
+	$(CC) $(CFLAGS) -c -o $@ $^
