@@ -18,7 +18,14 @@ LIB_DIRS = $(INCLUDE_GCC_DIR)
 TARGET = blink
 
 ###########################################################
+# Flags
+###########################################################
+MCU = msp430g2553
+CFLAGS = -mmcu=$(MCU) $(addprefix -I,$(INCLUDE_DIRS))
+LDFLAGS = $(addprefix -L,$(LIB_DIRS))
+
+###########################################################
 # Build
 ###########################################################
 $(TARGET): blink.c
-	$(CC) -mmcu=msp430g2553 -I$(INCLUDE_DIRS) -L$(LIB_DIRS) -o $(TARGET) blink.c
+	$(CC) $(CFLAGS) $(LDFLAGS) -o $(TARGET) blink.c
