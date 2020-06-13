@@ -22,10 +22,13 @@ TARGET = blink
 ###########################################################
 MCU = msp430g2553
 CFLAGS = -mmcu=$(MCU) $(addprefix -I,$(INCLUDE_DIRS))
-LDFLAGS = $(addprefix -L,$(LIB_DIRS))
+LDFLAGS = -mmcu=$(MCU) $(addprefix -L,$(LIB_DIRS))
 
 ###########################################################
 # Build
 ###########################################################
-$(TARGET): blink.c
-	$(CC) $(CFLAGS) $(LDFLAGS) -o $(TARGET) blink.c
+$(TARGET): blink.o
+	$(CC) $(LDFLAGS) -o $(TARGET) blink.o
+
+blink.o: blink.c
+	$(CC) -c $(CFLAGS) -o blink.o blink.c
