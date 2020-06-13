@@ -11,13 +11,17 @@ MSPGCC_BIN_DIR = $(MSPGCC_ROOT_DIR)/bin
 INCLUDE_GCC_DIR = /home/artfulbytes/ti/ccs910/ccs/ccs_base/msp430/include_gcc
 INCLUDE_DIRS = $(INCLUDE_GCC_DIR)
 LIB_DIRS = $(INCLUDE_GCC_DIR)
+ROOT = .
+SRC_DIR = $(ROOT)
+OBJ_DIR = $(ROOT)/obj
+BIN_DIR = $(ROOT)/bin
 
 ###########################################################
 # Files
 ###########################################################
-TARGET = blink
-SOURCES = blink.c
-OBJECTS = blink.o
+TARGET = $(BIN_DIR)/blink
+SOURCES = $(SRC_DIR)/blink.c
+OBJECTS = $(OBJ_DIR)/blink.o
 
 ###########################################################
 # Flags
@@ -31,8 +35,10 @@ LDFLAGS = -mmcu=$(MCU) $(addprefix -L,$(LIB_DIRS))
 ###########################################################
 $(TARGET): $(OBJECTS)
 	@echo "Linking $^"
+	@mkdir -p $(dir $@)
 	$(CC) $(LDFLAGS) -o $@ $^
 
-%.o: %.c
+$(OBJ_DIR)/%.o: %.c
 	@echo "Compiling $^"
+	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -c -o $@ $^
