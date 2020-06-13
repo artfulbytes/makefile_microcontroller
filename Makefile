@@ -20,8 +20,12 @@ BIN_DIR = $(ROOT)/bin
 # Files
 ###########################################################
 TARGET = $(BIN_DIR)/blink
-SOURCES = $(SRC_DIR)/blink.c
-OBJECTS = $(OBJ_DIR)/blink.o
+SOURCES = $(SRC_DIR)/blink.c \
+	  $(SRC_DIR)/math_function.c \
+	  $(SRC_DIR)/string_function.c
+OBJECTS = $(OBJ_DIR)/blink.o \
+	  $(OBJ_DIR)/math_function.o \
+	  $(OBJ_DIR)/string_function.o
 
 ###########################################################
 # Flags
